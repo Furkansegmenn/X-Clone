@@ -19,7 +19,7 @@ const postSchema = new mongoose.Schema(
 				ref: "User",
 			},
 		],
-		comment: [
+		comments: [
 			{
 				text: {
 					type: String,
