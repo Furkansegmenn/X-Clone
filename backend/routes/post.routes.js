@@ -12,7 +12,7 @@ import {
 } from "../controllers/post.controllers.js";
 
 const router = express.Router();
-router.get("/", protectRoute, getAllPosts);
+router.get("/all", protectRoute, getAllPosts);
 router.get("/user/:username", protectRoute, getUserPosts);
 router.get("/following", protectRoute, getFollowingPosts);
 router.get("/likes/:id", protectRoute, getLikedPosts);
