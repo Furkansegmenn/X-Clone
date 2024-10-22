@@ -137,7 +137,7 @@ export const getAllPosts = async (req, res) => {
 			}); // sort function allows us to sort posts by creation date; And populate function allows us to see users information be thanks to userId
 
 		if (posts.length === 0) {
-			res.status(200).json([]);
+			return res.status(200).json([]);
 		}
 		res.status(200).json(posts);
 	} catch (error) {
