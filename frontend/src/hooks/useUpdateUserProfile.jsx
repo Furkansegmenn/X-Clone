@@ -1,9 +1,11 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const useUpdateUserProfile = () => {
 	const queryClient = useQueryClient();
+	const { data: authUser } = useQuery({ queryKey: ["authUser"] });
+	const navigate = useNavigate();
 	const { mutateAsync: updateProfile, isPending: isUpdatingProfile } = useMutation({
 		mutationFn: async (formData) => {
 			try {
@@ -25,10 +27,11 @@ const useUpdateUserProfile = () => {
 		},
 		onSuccess: () => {
 			toast.success("Profile updated succesfully");
-			Promise.all(
-				[queryClient.invalidateQueries({ queryKey: ["authUser"] })],
-				[queryClient.invalidateQueries({ queryKey: ["userProfile"] })]
-			);
+			// Promise.all(
+			// 	[queryClient.invalidateQueries({ queryKey: ["authUser"] })],
+			// 	[queryClient.invalidateQueries({ queryKey: ["userProfile"] })]
+			// );
+			navigate.push("/profile" + authUser.username);
 		},
 		onError: (error) => {
 			toast.error(error.message);
