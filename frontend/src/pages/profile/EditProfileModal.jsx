@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useUpdateUserProfile from "../../hooks/useUpdateUserProfile";
+import { useNavigate } from "react-router-dom";
 
 const EditProfileModal = ({ authUser }) => {
 	const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const EditProfileModal = ({ authUser }) => {
 		newPassword: "",
 		currentPassword: "",
 	});
+	const navigate = useNavigate();
 
 	const handleInputChange = (e) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
